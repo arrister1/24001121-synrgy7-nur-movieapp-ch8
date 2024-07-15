@@ -5,7 +5,11 @@ plugins {
     id("kotlin-parcelize")
     id ("kotlin-kapt")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.firebase-perf")
 }
+apply (from= "../shared_dependencies.gradle")
 
 
 android {
@@ -81,6 +85,8 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("jp.wasabeef:glide-transformations:4.3.0")
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.perf)
     testImplementation("junit:junit:4.12")
     testImplementation("junit:junit:4.12")
     testImplementation("junit:junit:4.12")
@@ -111,13 +117,7 @@ dependencies {
     implementation ("io.insert-koin:koin-androidx-navigation:3.3.0")
 
 
-    testImplementation("org.mockito:mockito-core:4.4.0")
-    testImplementation("org.mockito:mockito-inline:4.4.0")
-    testImplementation("junit:junit:4.12")
-//    testImplementation ("androidx.arch.core:core-common:2.2.0")
-//    testImplementation ("androidx.arch.core:core-runtime:2.2.0")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

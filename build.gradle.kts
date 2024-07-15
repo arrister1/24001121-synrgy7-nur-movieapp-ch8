@@ -11,6 +11,10 @@ buildscript {
         google()
     }
     dependencies {
+        classpath(libs.gradle)
+        classpath(libs.google.services)
+        classpath(libs.firebase.crashlytics.gradle)
+        classpath(libs.perf.plugin)
         val navVersion = "2.7.5"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
     }

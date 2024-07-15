@@ -3,6 +3,8 @@ package com.example.movieapp.presentation.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,8 +35,9 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         setContentView(binding.root)
 
 
+
         binding.btnProfile.setOnClickListener {
-            startActivity(Intent(this@MainActivity, ProfileActivity::class.java ))
+            startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
             finish()
         }
 
@@ -44,13 +47,13 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         setupObservers()
 
         viewModels.getAllMovie()
-    }
+  }
 
 
 
     private fun setupUsername() {
         lifecycleScope.launch {
-            dataStore.username.collect{username ->
+            dataStore.username.collect { username ->
                 binding.tvUname.text = username ?: "Guest"
             }
         }
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         binding.homeRv.adapter = adapter
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModels.movie.observe(this) { resources ->
             when (resources) {
                 is Resource.Loading -> {
@@ -90,4 +93,12 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         intent.putExtra("EXTRA_MOVIE", movies)
         startActivity(intent)
     }
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }
+
+
+

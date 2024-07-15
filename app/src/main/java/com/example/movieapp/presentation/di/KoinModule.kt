@@ -1,4 +1,4 @@
-package com.example.movieapp.datas.di
+package com.example.movieapp.presentation.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -7,15 +7,20 @@ import com.example.movieapp.datas.remote.RemoteDataSource
 import com.example.movieapp.datas.remote.network.ApiService
 import com.example.movieapp.datas.remote.repository.MovieRepository
 import com.example.movieapp.domain.repository.IMovieRepository
+import com.example.movieapp.domain.usecase.MovieInteractor
+import com.example.movieapp.domain.usecase.MovieUseCase
+import com.example.movieapp.presentation.viewmodel.MovieViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object DataModule {
+object KoinModule {
+
     val networkModule = module {
         single {
             val context: Context = androidContext()
@@ -43,6 +48,19 @@ object DataModule {
     }
 
     val dataModule = module {
-        single { DataStore(androidContext()) }}}
+        single { DataStore(androidContext()) }}
 
 
+
+    val useCaseModule = module {
+        factory<MovieUseCase> { MovieInteractor(get()) }
+    }
+
+
+
+
+val viewModelModule = module {
+        viewModel { MovieViewModel(get()) }
+
+    }
+}
