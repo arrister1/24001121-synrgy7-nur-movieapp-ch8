@@ -70,11 +70,9 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnItemClickListener {
         viewModels.movie.observe(this) { resources ->
             when (resources) {
                 is Resource.Loading -> {
-                    //binding.progressBar.visibility = View.VISIBLE
                 }
 
                 is Resource.Success -> {
-                    //binding.progressBar.visibility = View.GONE
                     resources.data?.let { movieList ->
                         adapter.setMovieList(movieList)
                     }
